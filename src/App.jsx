@@ -5,11 +5,14 @@ import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import PageContainer from './PageContainer/PageContainer';
+import PageLayout from './PageLayout/PageLayout';
 
 function App() {
   return (
     <div className="App">
-      <PageContainer>Hello world</PageContainer>
+      <PageContainer>
+        <PageLayout />
+      </PageContainer>
     </div>
   );
 }
