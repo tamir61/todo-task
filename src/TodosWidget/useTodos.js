@@ -6,7 +6,7 @@ const LOCAL_STORAGE_TODOS_KEY = 'LOCAL_STORAGE_TODOS_KEY';
 
 function useTodos() {
   const [inputValue, setInputValue] = useState('');
-  const [todosList, setTodosList] = useLocalStorage(LOCAL_STORAGE_TODOS_KEY, {});
+  const [todosList, setTodosList] = useLocalStorage(LOCAL_STORAGE_TODOS_KEY, []);
 
   const handleTextInputChange = useCallback(event => setInputValue(event.target.value), []);
 
@@ -14,10 +14,7 @@ function useTodos() {
     event => {
       if (event.key === 'Enter' && inputValue) {
         const toDoId = new Date().getTime();
-        setTodosList(prevValue => ({
-          [toDoId]: { completed: false, task: inputValue },
-          ...prevValue
-        }));
+        setTodosList(prevValue => [{ id: toDoId, completed: false, task: inputValue }, ...prevValue]);
         setInputValue('');
       }
     },
@@ -25,10 +22,10 @@ function useTodos() {
   );
 
   const handleDeleteTodo = useCallback(
-    toDoId => {
+    toDoIndex => {
       setTodosList(prevValue => {
         const newState = structuredClone(prevValue);
-        delete newState[toDoId];
+        newState.splice(toDoIndex, 1);
         return newState;
       });
     },
@@ -36,10 +33,10 @@ function useTodos() {
   );
 
   const handleToggleComplete = useCallback(
-    toDoId => {
+    toDoIndex => {
       setTodosList(prevValue => {
         const newState = structuredClone(prevValue);
-        newState[toDoId].completed = !newState[toDoId].completed;
+        newState[toDoIndex].completed = !newState[toDoIndex].completed;
         return newState;
       });
     },

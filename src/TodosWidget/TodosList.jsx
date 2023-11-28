@@ -11,20 +11,20 @@ function TodoList({ todos, toggleComplete, deleteTodo }) {
   return (
     <Paper>
       <List>
-        {Object.keys(todos).map(todoId => (
+        {todos.map((todo, index) => (
           <ListItem
-            key={todoId}
+            key={todo.id}
             dense
-            onClick={() => toggleComplete(todoId)}
+            onClick={() => toggleComplete(index)}
             sx={{
-              textDecoration: todos[todoId].completed ? 'line-through' : 'none',
-              opacity: todos[todoId].completed ? 0.5 : 1
+              textDecoration: todo.completed ? 'line-through' : 'none',
+              opacity: todo.completed ? 0.5 : 1
             }}
           >
-            <Checkbox edge="start" checked={todos[todoId].completed} tabIndex={-1} disableRipple />
-            <ListItemText primary={todos[todoId].task} />
+            <Checkbox edge="start" checked={todo.completed} tabIndex={-1} disableRipple />
+            <ListItemText primary={todo.task} />
             <ListItemSecondaryAction>
-              <IconButton edge="end" aria-label="delete" onClick={() => deleteTodo(todoId)}>
+              <IconButton edge="end" aria-label="delete" onClick={() => deleteTodo(index)}>
                 <DeleteIcon />
               </IconButton>
             </ListItemSecondaryAction>
@@ -38,10 +38,12 @@ function TodoList({ todos, toggleComplete, deleteTodo }) {
 export default TodoList;
 
 TodoList.propTypes = {
-  todos: PropTypes.shape({
-    completed: PropTypes.bool.isRequired,
-    task: PropTypes.string.isRequired
-  }).isRequired,
+  todos: PropTypes.arrayOf(
+    PropTypes.shape({
+      completed: PropTypes.bool.isRequired,
+      task: PropTypes.string.isRequired
+    })
+  ).isRequired,
   toggleComplete: PropTypes.func.isRequired,
   deleteTodo: PropTypes.func.isRequired
 };
