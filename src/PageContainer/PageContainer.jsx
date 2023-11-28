@@ -1,6 +1,7 @@
 import React from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
 import { styled } from '@mui/material/styles';
+import PropTypes from 'prop-types';
 
 const StyledContainer = styled('div')(() => ({
   display: 'flex',
@@ -18,3 +19,7 @@ function PageContainer({ children }) {
 }
 
 export default PageContainer;
+
+PageContainer.propTypes = {
+  children: PropTypes.node.isRequired
+};
