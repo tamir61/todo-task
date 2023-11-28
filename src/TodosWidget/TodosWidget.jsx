@@ -3,10 +3,13 @@ import { Grid, TextField, Typography } from '@mui/material';
 
 import WidgetContainer from '../components/WidgetContainer/WidgetContainer';
 import TodoList from './TodosList';
+import useLocalStorage from '../utils/useLocalStorage';
+
+const LOCAL_STORAGE_TODOS_KEY = 'LOCAL_STORAGE_TODOS_KEY';
 
 function TodosWidget() {
   const [inputValue, setInputValue] = useState('');
-  const [todosList, setTodosList] = useState({});
+  const [todosList, setTodosList] = useLocalStorage(LOCAL_STORAGE_TODOS_KEY, {});
 
   const handleOnChange = event => setInputValue(event.target.value);
 
