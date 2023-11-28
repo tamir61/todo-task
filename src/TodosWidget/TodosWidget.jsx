@@ -14,7 +14,7 @@ function TodosWidget() {
     if (event.key === 'Enter' && inputValue) {
       const toDoId = new Date().getTime();
       setTodosList(prevValue => ({
-        [toDoId]: { task: inputValue },
+        [toDoId]: { completed: false, task: inputValue },
         ...prevValue
       }));
       setInputValue('');
@@ -25,6 +25,14 @@ function TodosWidget() {
     setTodosList(prevValue => {
       const newState = structuredClone(prevValue);
       delete newState[toDoId];
+      return newState;
+    });
+  };
+
+  const handleToggleComplete = toDoId => {
+    setTodosList(prevValue => {
+      const newState = structuredClone(prevValue);
+      newState[toDoId].completed = !newState[toDoId].completed;
       return newState;
     });
   };
@@ -43,7 +51,7 @@ function TodosWidget() {
           onChange={handleOnChange}
           onKeyDown={handleKeyPress}
         />
-        <TodoList deleteTodo={handleDeleteTodo} todos={todosList} />
+        <TodoList toggleComplete={handleToggleComplete} deleteTodo={handleDeleteTodo} todos={todosList} />
       </WidgetContainer>
     </Grid>
   );
