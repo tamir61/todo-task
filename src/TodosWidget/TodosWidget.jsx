@@ -21,6 +21,14 @@ function TodosWidget() {
     }
   };
 
+  const handleDeleteTodo = toDoId => {
+    setTodosList(prevValue => {
+      const newState = structuredClone(prevValue);
+      delete newState[toDoId];
+      return newState;
+    });
+  };
+
   return (
     <Grid item xs={12} md={6} lg={8}>
       <WidgetContainer>
@@ -35,7 +43,7 @@ function TodosWidget() {
           onChange={handleOnChange}
           onKeyDown={handleKeyPress}
         />
-        <TodoList todos={todosList} />
+        <TodoList deleteTodo={handleDeleteTodo} todos={todosList} />
       </WidgetContainer>
     </Grid>
   );
