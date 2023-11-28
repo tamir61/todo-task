@@ -1,44 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Grid, TextField, Typography } from '@mui/material';
 
 import WidgetContainer from '../components/WidgetContainer/WidgetContainer';
 import TodoList from './TodosList';
-import useLocalStorage from '../utils/useLocalStorage';
-
-const LOCAL_STORAGE_TODOS_KEY = 'LOCAL_STORAGE_TODOS_KEY';
+import useTodos from './useTodos';
 
 function TodosWidget() {
-  const [inputValue, setInputValue] = useState('');
-  const [todosList, setTodosList] = useLocalStorage(LOCAL_STORAGE_TODOS_KEY, {});
-
-  const handleOnChange = event => setInputValue(event.target.value);
-
-  const handleKeyPress = event => {
-    if (event.key === 'Enter' && inputValue) {
-      const toDoId = new Date().getTime();
-      setTodosList(prevValue => ({
-        [toDoId]: { completed: false, task: inputValue },
-        ...prevValue
-      }));
-      setInputValue('');
-    }
-  };
-
-  const handleDeleteTodo = toDoId => {
-    setTodosList(prevValue => {
-      const newState = structuredClone(prevValue);
-      delete newState[toDoId];
-      return newState;
-    });
-  };
-
-  const handleToggleComplete = toDoId => {
-    setTodosList(prevValue => {
-      const newState = structuredClone(prevValue);
-      newState[toDoId].completed = !newState[toDoId].completed;
-      return newState;
-    });
-  };
+  const { todosList, handleKeyPress, handleDeleteTodo, handleToggleComplete, inputValue, handleTextInputChange } =
+    useTodos();
 
   return (
     <Grid item xs={12} md={6} lg={8}>
@@ -51,7 +20,7 @@ function TodosWidget() {
           label="New task"
           variant="outlined"
           value={inputValue}
-          onChange={handleOnChange}
+          onChange={handleTextInputChange}
           onKeyDown={handleKeyPress}
         />
         <TodoList toggleComplete={handleToggleComplete} deleteTodo={handleDeleteTodo} todos={todosList} />
