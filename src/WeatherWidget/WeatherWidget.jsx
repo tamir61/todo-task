@@ -52,7 +52,7 @@ function WeatherWidget() {
                     sx={{
                       fontSize: {
                         xs: '1.5rem',
-                        sm: '2.25rem'
+                        sm: '2rem'
                       }
                     }}
                   >
