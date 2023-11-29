@@ -1,17 +1,24 @@
-import { CircularProgress, Grid, Typography } from '@mui/material';
+import { CircularProgress, Typography } from '@mui/material';
 import * as React from 'react';
 import { styled } from '@mui/material/styles';
 
 import WidgetContainer from '../components/WidgetContainer/WidgetContainer';
 import useGetUserGeoLocation from './useGetUserGeoLocation';
+import { MEDIA_QUERY_MOBILE_DOWN } from '../utils/constants';
 
 const MOCKED_TEMPERATURE_VALUE = '19';
+export const WIDGET_HEIGHT_MOBILE_VIEW = '80px';
 
 const Container = styled('div')(() => ({
   display: 'flex',
-  flex: 1,
   alignItems: 'center',
-  justifyContent: 'center'
+  justifyContent: 'center',
+  flex: 4,
+  height: '100%',
+  [MEDIA_QUERY_MOBILE_DOWN]: {
+    width: '100%',
+    maxHeight: WIDGET_HEIGHT_MOBILE_VIEW
+  }
 }));
 
 const WeatherDisplayedData = styled('div')(() => ({
@@ -29,29 +36,27 @@ function WeatherWidget() {
   const { city, town, village, country } = data?.address || {};
 
   return (
-    <Grid item xs={12} md={6} lg={4}>
+    <Container>
       <WidgetContainer>
-        <Container>
-          {isLoading !== false && !hasError ? (
-            <CircularProgress />
-          ) : (
-            <WeatherDisplayedData>
-              {hasError ? (
-                <Typography>Something went wrong, could not display the weather in your location :(</Typography>
-              ) : (
-                <>
-                  <Typography variant="h3">{MOCKED_TEMPERATURE_VALUE}°C</Typography>
-                  <Typography>
-                    {(city || town || village) && `${city || town || village} `}
-                    {country && `${country}`}
-                  </Typography>
-                </>
-              )}
-            </WeatherDisplayedData>
-          )}
-        </Container>
+        {isLoading !== false && !hasError ? (
+          <CircularProgress />
+        ) : (
+          <WeatherDisplayedData>
+            {hasError ? (
+              <Typography>Something went wrong, could not display the weather in your location :(</Typography>
+            ) : (
+              <>
+                <Typography variant="h3">{MOCKED_TEMPERATURE_VALUE}°C</Typography>
+                <Typography>
+                  {(city || town || village) && `${city || town || village} `}
+                  {country && `${country}`}
+                </Typography>
+              </>
+            )}
+          </WeatherDisplayedData>
+        )}
       </WidgetContainer>
-    </Grid>
+    </Container>
   );
 }
 

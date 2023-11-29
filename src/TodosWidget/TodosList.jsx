@@ -1,7 +1,12 @@
 import React from 'react';
-import { List, ListItem, ListItemText, ListItemSecondaryAction, Checkbox, IconButton, Paper } from '@mui/material';
+import { List, ListItem, ListItemText, ListItemSecondaryAction, Checkbox, IconButton } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import PropTypes from 'prop-types';
+import { styled } from '@mui/material/styles';
+
+const Container = styled('div')(() => ({
+  overflowY: 'scroll'
+}));
 
 function TodoList({ todos, toggleComplete, deleteTodo }) {
   if (!Object.keys(todos || {}).length) {
@@ -9,7 +14,7 @@ function TodoList({ todos, toggleComplete, deleteTodo }) {
   }
 
   return (
-    <Paper>
+    <Container>
       <List>
         {todos.map((todo, index) => (
           <ListItem
@@ -31,7 +36,7 @@ function TodoList({ todos, toggleComplete, deleteTodo }) {
           </ListItem>
         ))}
       </List>
-    </Paper>
+    </Container>
   );
 }
 
