@@ -39,9 +39,7 @@ function Header() {
   return (
     <AppBar position="static">
       <Toolbar>
-        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          My Weather & Todo App
-        </Typography>
+        <Typography variant="h6">My Weather & Todo App</Typography>
       </Toolbar>
     </AppBar>
   );
@@ -49,7 +47,7 @@ function Header() {
 
 function Footer() {
   return (
-    <AppBar position="static" color="primary" sx={{ top: 'auto', bottom: 0 }}>
+    <AppBar position="static" color="primary" sx={{ bottom: 0 }}>
       <Toolbar>
         <Typography variant="caption">© 2023 My Weather & Todo App</Typography>
       </Toolbar>
