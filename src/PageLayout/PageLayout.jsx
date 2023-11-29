@@ -47,7 +47,7 @@ function Header() {
 
 function Footer() {
   return (
-    <AppBar position="static" color="primary" sx={{ bottom: 0 }}>
+    <AppBar position="static" sx={{ bottom: 0 }}>
       <Toolbar>
         <Typography variant="caption">© 2023 My Weather & Todo App</Typography>
       </Toolbar>
