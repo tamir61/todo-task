@@ -55,7 +55,7 @@ function WeatherWidget() {
                     }
                   }}
                 >
-                  {MOCKED_TEMPERATURE_VALUE}°C
+                  {MOCKED_TEMPERATURE_VALUE}°C, Clear
                 </Typography>
                 <Typography>
                   {(city || town || village) && `${city || town || village} `}
