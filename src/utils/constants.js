@@ -1,0 +1,2 @@
+const MOBILE_BREAKPOINT_VALUE = 600;
+export const MEDIA_QUERY_MOBILE_DOWN = `@media (max-width: ${MOBILE_BREAKPOINT_VALUE}px)`;
