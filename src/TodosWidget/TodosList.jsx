@@ -9,7 +9,7 @@ const Container = styled('div')(() => ({
 }));
 
 function TodoList({ todos, toggleComplete, deleteTodo }) {
-  if (!Object.keys(todos || {}).length) {
+  if (!todos.length) {
     return null;
   }
 
