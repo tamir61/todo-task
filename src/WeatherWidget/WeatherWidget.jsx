@@ -38,33 +38,35 @@ function WeatherWidget() {
   return (
     <Container>
       <WidgetContainer>
-        {isLoading !== false && !hasError ? (
-          <CircularProgress />
-        ) : (
-          <WeatherDisplayedData>
-            {hasError ? (
-              <Typography>Something went wrong, could not display the weather in your location :(</Typography>
-            ) : (
-              <>
-                <Typography
-                  variant="h3"
-                  sx={{
-                    fontSize: {
-                      xs: '1.5rem',
-                      sm: '2.25rem'
-                    }
-                  }}
-                >
-                  {MOCKED_TEMPERATURE_VALUE}°C, Clear
-                </Typography>
-                <Typography>
-                  {(city || town || village) && `${city || town || village} `}
-                  {country && `${country}`}
-                </Typography>
-              </>
-            )}
-          </WeatherDisplayedData>
-        )}
+        <WeatherDisplayedData>
+          {isLoading !== false && !hasError ? (
+            <CircularProgress />
+          ) : (
+            <>
+              {hasError ? (
+                <Typography>Something went wrong, could not display the weather in your location :(</Typography>
+              ) : (
+                <>
+                  <Typography
+                    variant="h3"
+                    sx={{
+                      fontSize: {
+                        xs: '1.5rem',
+                        sm: '2.25rem'
+                      }
+                    }}
+                  >
+                    {MOCKED_TEMPERATURE_VALUE}°C, Clear
+                  </Typography>
+                  <Typography>
+                    {(city || town || village) && `${city || town || village} `}
+                    {country && `${country}`}
+                  </Typography>
+                </>
+              )}
+            </>
+          )}
+        </WeatherDisplayedData>
       </WidgetContainer>
     </Container>
   );
