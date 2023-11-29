@@ -27,7 +27,14 @@ function TodoList({ todos, toggleComplete, deleteTodo }) {
             }}
           >
             <Checkbox edge="start" checked={todo.completed} tabIndex={-1} disableRipple />
-            <ListItemText primary={todo.task} />
+            <ListItemText
+              primary={todo.task}
+              primaryTypographyProps={{
+                style: {
+                  wordBreak: 'break-word'
+                }
+              }}
+            />
             <ListItemSecondaryAction>
               <IconButton edge="end" aria-label="delete" onClick={() => deleteTodo(index)}>
                 <DeleteIcon />
