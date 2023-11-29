@@ -46,7 +46,17 @@ function WeatherWidget() {
               <Typography>Something went wrong, could not display the weather in your location :(</Typography>
             ) : (
               <>
-                <Typography variant="h3">{MOCKED_TEMPERATURE_VALUE}°C</Typography>
+                <Typography
+                  variant="h3"
+                  sx={{
+                    fontSize: {
+                      xs: '1.5rem',
+                      sm: '2.25rem'
+                    }
+                  }}
+                >
+                  {MOCKED_TEMPERATURE_VALUE}°C
+                </Typography>
                 <Typography>
                   {(city || town || village) && `${city || town || village} `}
                   {country && `${country}`}

@@ -28,7 +28,17 @@ function TodosWidget() {
   return (
     <Container>
       <WidgetContainer>
-        <Typography variant="h5" component="h2" gutterBottom>
+        <Typography
+          variant="h5"
+          component="h2"
+          gutterBottom
+          sx={{
+            fontSize: {
+              xs: '1.25rem',
+              sm: '1.5rem'
+            }
+          }}
+        >
           Todo List
         </Typography>
         <TextField
